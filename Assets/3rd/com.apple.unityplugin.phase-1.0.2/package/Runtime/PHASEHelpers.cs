@@ -77,7 +77,7 @@ namespace Apple.PHASE
         /// <returns> The unique ID of the created source, returns <c>InvalidId</c> on failure. </returns>
         [DllImport(PluginDllName)] public static extern long PHASECreatePointSource();
         
-        [DllImport(PluginDllName)] public static extern long PHASEAdjustVolume(long inSourceId,double targetVolume);
+        [DllImport(PluginDllName)] public static extern long PHASEAdjustVolume(long inSourceId, double targetVolume);
 
         /// <summary>
         /// Create a volumetric source in the PHASE engine from given <c>Mesh</c> parameters.
