@@ -1,0 +1,17 @@
+{
+    "name": "Framework",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1e90ac084be3f8d469f923da4b9f7c81",
+        "GUID:f008255f36a214aac8c8aa21e586834b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

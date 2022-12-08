@@ -1,13 +1,11 @@
-﻿using Apple.Core;
+﻿#if UNITY_EDITOR_OSX
+using Apple.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-
-#if UNITY_EDITOR_OSX
 using UnityEditor.iOS.Xcode;
-#endif
 
 namespace Apple.PHASE.Editor
 {
@@ -89,3 +87,4 @@ namespace Apple.PHASE.Editor
 #endif
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using Apple.Core;
+﻿#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
+using Apple.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,3 +83,4 @@ namespace Apple.Core
         public virtual void OnFinalizePostProcess(AppleBuildProfile appleBuildProfile, BuildTarget buildTarget, string pathToBuiltProject) { }
     }
 }
+#endif

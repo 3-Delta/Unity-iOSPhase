@@ -41,7 +41,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Framework\AmbienceBlender.cs" />
      <Compile Include="Assets\Scripts\Framework\iOSAudioSourceLoader.cs" />
+     <Compile Include="Assets\Scripts\Framework\Rotator.cs" />
+     <Compile Include="Assets\Scripts\Framework\FootstepTrigger.cs" />
      <None Include="Assets\3rd\com.apple.unityplugin.core-1.0.2\package\package.json" />
      <None Include="Assets\3rd\com.apple.unityplugin.core-1.0.2\package\Plugins\tvOS\AppleCoreNative.framework\Modules\AppleCoreNative.swiftmodule\arm64-apple-tvos.abi.json" />
      <None Include="Assets\3rd\com.apple.unityplugin.phase-1.0.2\package\package.json" />
@@ -647,10 +650,6 @@
     <ProjectReference Include="Apple.Core.csproj">
       <Project>{6f66dd85-bb82-31aa-fec8-f2ffb622367c}</Project>
       <Name>Apple.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="Apple.Core.Tests.Editor.csproj">
-      <Project>{5f2a6d7e-8eec-a555-ba2e-f6d6e2b94c93}</Project>
-      <Name>Apple.Core.Tests.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

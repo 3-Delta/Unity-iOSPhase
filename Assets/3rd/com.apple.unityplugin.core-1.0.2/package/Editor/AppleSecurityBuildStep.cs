@@ -1,3 +1,4 @@
+#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
 using UnityEditor;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
@@ -130,3 +131,4 @@ namespace Apple.Core
         }
     }
 }
+#endif

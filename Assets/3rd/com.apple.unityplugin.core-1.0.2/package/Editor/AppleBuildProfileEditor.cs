@@ -1,3 +1,4 @@
+#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -303,3 +304,4 @@ namespace Apple.Core
         }
     }
 }
+#endif

@@ -12,6 +12,7 @@ namespace Apple.PHASE
     /// <summary>
     /// Class representing a source in the PHASE engine.
     /// </summary>
+#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
     public class PHASESource : MonoBehaviour
     {
         private bool _toBeDestroyed = false;
@@ -466,4 +467,8 @@ namespace Apple.PHASE
         }
 #endif
     }
+
+#else
+    public class PHASESource : MonoBehaviour { }
+#endif
 }
