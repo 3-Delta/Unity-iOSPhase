@@ -70,3 +70,5 @@
 /Framework.csproj
 /Framework.Player.csproj
 /*.csproj
+/Spatial
+/.vs
