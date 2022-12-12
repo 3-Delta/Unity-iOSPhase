@@ -6,6 +6,7 @@ namespace Apple.PHASE
     /// <summary>
     /// Class representing an occluder in the PHASE engine.
     /// </summary>
+#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
     public class PHASEOccluder : MonoBehaviour
     {
         /// <summary>
@@ -37,7 +38,8 @@ namespace Apple.PHASE
                 GCHandle gcIndices = GCHandle.Alloc(meshData.Indices, GCHandleType.Pinned);
 
                 // Create a source.
-                _occluderId = Helpers.PHASECreateOccluder(meshData.VertexCount, gcVertices.AddrOfPinnedObject(), gcNormals.AddrOfPinnedObject(), meshData.IndexCount, gcIndices.AddrOfPinnedObject());
+                _occluderId =
+ Helpers.PHASECreateOccluder(meshData.VertexCount, gcVertices.AddrOfPinnedObject(), gcNormals.AddrOfPinnedObject(), meshData.IndexCount, gcIndices.AddrOfPinnedObject());
                 if (_occluderId == Helpers.InvalidId)
                 {
                     Debug.LogError("Failed to create PHASE Occluder");
@@ -147,4 +149,8 @@ namespace Apple.PHASE
             DestroyFromPHASE();
         }
     }
+#else
+    public class PHASEOccluder : MonoBehaviour {
+    }
+#endif
 }

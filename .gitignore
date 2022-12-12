@@ -64,3 +64,9 @@
 /UnityEngine.UI.Tests.Player.csproj
 /Temp
 /Unity-iOSPhase.sln
+/Apple.PHASE.Demos.csproj
+/Apple.PHASE.Demos.Player.csproj
+/Assembly-CSharp.csproj
+/Framework.csproj
+/Framework.Player.csproj
+/*.csproj
