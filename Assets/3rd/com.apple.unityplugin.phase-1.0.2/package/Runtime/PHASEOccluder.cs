@@ -6,7 +6,6 @@ namespace Apple.PHASE
     /// <summary>
     /// Class representing an occluder in the PHASE engine.
     /// </summary>
-#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
     public class PHASEOccluder : MonoBehaviour
     {
         /// <summary>
@@ -20,6 +19,7 @@ namespace Apple.PHASE
         // Source id to store.
         protected long _occluderId = Helpers.InvalidId;
 
+#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
         // Awake is called before the scene starts.
         void Awake()
         {
@@ -148,9 +148,6 @@ namespace Apple.PHASE
         {
             DestroyFromPHASE();
         }
-    }
-#else
-    public class PHASEOccluder : MonoBehaviour {
-    }
 #endif
+    }
 }

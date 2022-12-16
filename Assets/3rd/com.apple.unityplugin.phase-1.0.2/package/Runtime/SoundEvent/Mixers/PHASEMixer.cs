@@ -24,7 +24,9 @@ namespace Apple.PHASE
 
         void OnDestroy()
         {
+#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
             DestroyFromPHASE();
+#endif
         }
 
         /// <summary>

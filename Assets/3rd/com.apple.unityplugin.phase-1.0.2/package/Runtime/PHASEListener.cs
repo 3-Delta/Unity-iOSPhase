@@ -12,7 +12,6 @@ namespace Apple.PHASE
     /// </summary>
     /// <remarks> Only one listener can exist at a time. </remarks>
     [DisallowMultipleComponent]
-#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
     public class PHASEListener : MonoBehaviour
     {
         // Transform to store.
@@ -30,6 +29,7 @@ namespace Apple.PHASE
         // Is this listener registered with PHASE?
         private bool _registered = false;
 
+#if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
         // Awake is called before the scene starts.
         void Awake()
         {
@@ -203,8 +203,6 @@ namespace Apple.PHASE
             Gizmos.DrawMesh(cardioid);
         }
 #endif
-    }
-#else
-    public class PHASEListener : MonoBehaviour { }
 #endif
+    }
 }
