@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca9389c3472494352aa0315346a159f7
+guid: b858469def3344ecab34985f8ba9c230
 folderAsset: yes
 PluginImporter:
   externalObjects: {}
@@ -27,7 +27,8 @@ PluginImporter:
       Standalone: OSXUniversal
     second:
       enabled: 1
-      settings: {}
+      settings:
+        CPU: AnyCPU
   userData: 
   assetBundleName: 
   assetBundleVariant: 

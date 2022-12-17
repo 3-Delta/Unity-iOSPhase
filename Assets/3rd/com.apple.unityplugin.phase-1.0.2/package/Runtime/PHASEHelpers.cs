@@ -112,6 +112,8 @@ namespace Apple.PHASE
         /// </summary>
         /// <returns> True on success, false otherwise. </returns>
         [DllImport(PluginDllName)] public static extern bool PHASECreateListener();
+        
+        [DllImport(PluginDllName)] public static extern bool PHASEExistListener();
 
         /// <summary>
         /// Destroy the listener from the PHASE engine.

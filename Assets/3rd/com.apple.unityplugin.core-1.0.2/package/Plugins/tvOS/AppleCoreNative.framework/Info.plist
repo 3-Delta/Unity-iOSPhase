@@ -37,9 +37,9 @@
 	<key>DTSDKName</key>
 	<string>appletvos16.1</string>
 	<key>DTXcode</key>
-	<string>1410</string>
+	<string>1420</string>
 	<key>DTXcodeBuild</key>
-	<string>14B47b</string>
+	<string>14C18</string>
 	<key>MinimumOSVersion</key>
 	<string>13.0</string>
 	<key>UIDeviceFamily</key>
