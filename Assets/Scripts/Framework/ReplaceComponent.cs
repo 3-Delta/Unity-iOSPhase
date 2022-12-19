@@ -24,7 +24,7 @@ public class ReplaceComponent<T> : MonoBehaviour where T : MonoBehaviour {
             // 设置新的final
             finalT = gameObject.AddComponent<T>();
         }
-        
+
         cur = GetComponent<T>();
     }
 
@@ -39,12 +39,12 @@ public class ReplaceComponent<T> : MonoBehaviour where T : MonoBehaviour {
         else {
             // 其实 不支持动态修改default,也就是说default不能被销毁，只能长存
             // 这里为了健壮性，指向final
-            
+
             // 销毁默认,则默认指向fnial
             defaultT = finalT;
         }
     }
-    
+
     // public static void TryReplace(GameObject target) {
     //     if (defaultT == null) {
     //         // 首个
