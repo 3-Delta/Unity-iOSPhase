@@ -61,7 +61,7 @@ namespace Apple.PHASE
         // Source id to store.
         private long _sourceId = Helpers.InvalidId;
 
-        private static Dictionary<long, PHASESource> _registeredSources = new Dictionary<long, PHASESource>();
+        public static Dictionary<long, PHASESource> _registeredSources = new Dictionary<long, PHASESource>();
 
         // Transform to use.
         private Transform _transform;
@@ -145,6 +145,7 @@ namespace Apple.PHASE
                     Debug.LogError($"Error in PHASESource {name} with ID {_sourceId}");
                     break;
                 case Helpers.PHASESoundEventStartHandlerReason.PHASESoundEventStartHandlerReasonFinishedPlaying:
+                    Debug.Log("PHASESource was finished: " + name);
                     break;
                 case Helpers.PHASESoundEventStartHandlerReason.PHASESoundEventStartHandlerReasonTerminated:
                     Debug.Log("PHASESource was killed");
@@ -160,6 +161,7 @@ namespace Apple.PHASE
         /// <summary>
         /// Play the sound event on this source.
         /// </summary>
+        [ContextMenu(nameof(Play))]
         public void Play()
         {
             if (_soundEvent == null)
@@ -201,6 +203,7 @@ namespace Apple.PHASE
         /// <summary>
         /// Stop the playing sound event on this source. 
         /// </summary>
+        [ContextMenu(nameof(Stop))]
         public void Stop()
         {
             List<long> toBeDeleted = new List<long>();
@@ -386,86 +389,6 @@ namespace Apple.PHASE
                 Start();
             }
         }
-
-#if UNITY_EDITOR
-        private void OnDrawGizmos()
-        {
-            if (_soundEvent)
-            {
-                _mixers = _soundEvent.GetMixers();
-            }
-            if (_mixers == null)
-            {
-                return;
-            }
-
-            // The listener doesn't know about action trees or mixers,
-            // So we need to send it the info it needs to draw the visualization.
-            if (_listener == null)
-            {
-                PHASEListener[] listeners = FindObjectsOfType<PHASEListener>();
-                if (listeners.Length > 0)
-                {
-                    // Only one listener per scene allowed.
-                    _listener = listeners[0];
-                }
-            }
-
-            if (_listener != null)
-            {
-                _listener.AddMixers(_mixers);
-            }
-            foreach (PHASEMixer entry in _mixers)
-            {
-                if (entry is PHASESpatialMixer)
-                {
-                    PHASESpatialMixer mixer = entry as PHASESpatialMixer;
-                    if (Selection.Contains(mixer.GetInstanceID()))
-                    {
-                        Helpers.DirectivityModelSubbandParameters subbandParameters = mixer.GetSourceDirectivityModelSubbandParameters();
-                        switch (mixer.GetSourceDirectivityType())
-                        {
-                            case Helpers.DirectivityType.None:
-                                break;
-                            case Helpers.DirectivityType.Cone:
-                                DrawConeWithParameters(subbandParameters);
-                                break;
-                            case Helpers.DirectivityType.Cardioid:
-                                DrawCardioidWithParameters(subbandParameters);
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void DrawConeWithParameters(Helpers.DirectivityModelSubbandParameters parameters)
-        {
-            Color innerConeColor = new Color(0f, 0f, 0.7f, 0.7f);
-            Mesh innerCone = PHASEDirectivityVisualization.GenerateArcMesh(Mathf.Deg2Rad * parameters.InnerAngle);
-            innerCone.name = "innerCone";
-            Gizmos.color = innerConeColor;
-            Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.DrawMesh(innerCone);
-
-            Color outerConeColor = new Color(0f, 0f, 1f, 0.5f);
-            Mesh outerCone = PHASEDirectivityVisualization.GenerateArcMesh(Mathf.Deg2Rad * parameters.OuterAngle);
-            outerCone.name = "outerCone";
-            Gizmos.color = outerConeColor;
-            Gizmos.DrawMesh(outerCone);
-        }
-
-        private void DrawCardioidWithParameters(Helpers.DirectivityModelSubbandParameters parameters)
-        {
-            Color cardioidColor = new Color(0f, 0f, 1f, 0.5f);
-            Gizmos.color = cardioidColor;
-
-            Mesh cardioid = PHASEDirectivityVisualization.GenerateCardioidMesh(parameters.Pattern, parameters.Sharpness);
-            cardioid.name = "cardioid";
-            Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.DrawMesh(cardioid);
-        }
-#endif
 #endif
     }
 }

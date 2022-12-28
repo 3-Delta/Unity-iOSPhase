@@ -147,62 +147,6 @@ namespace Apple.PHASE
                 Helpers.PHASESetSceneReverbPreset((int)_reverbPreset);
             }
         }
-
-#if UNITY_EDITOR
-        private void OnDrawGizmos()
-        {
-            foreach (PHASEMixer entry in _mixers)
-            {
-                if (entry is PHASESpatialMixer)
-                {
-                    PHASESpatialMixer mixer = entry as PHASESpatialMixer;
-                    if (Selection.Contains(mixer.GetInstanceID()))
-                    {
-                        Helpers.DirectivityModelSubbandParameters subbandParameters = mixer.GetListenerDirectivityModelSubbandParameters();
-                        switch (mixer.GetListenerDirectivityType())
-                        {
-                            case Helpers.DirectivityType.None:
-                                break;
-                            case Helpers.DirectivityType.Cone:
-                                DrawConeWithParameters(subbandParameters);
-                                break;
-                            case Helpers.DirectivityType.Cardioid:
-                                DrawCardioidWithParameters(subbandParameters);
-                                break;
-
-                        }
-                    }
-                }
-            }
-        }
-
-        private void DrawConeWithParameters(Helpers.DirectivityModelSubbandParameters parameters)
-        {
-            Color innerConeColor = new Color(0f, 0f, 0.7f, 0.7f);
-            Mesh innerCone = PHASEDirectivityVisualization.GenerateArcMesh(Mathf.Deg2Rad * parameters.InnerAngle);
-            innerCone.name = "innerCone";
-            Gizmos.color = innerConeColor;
-            Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.DrawMesh(innerCone);
-
-            Color outerConeColor = new Color(0f, 0f, 1f, 0.5f);
-            Mesh outerCone = PHASEDirectivityVisualization.GenerateArcMesh(Mathf.Deg2Rad * parameters.OuterAngle);
-            outerCone.name = "outerCone";
-            Gizmos.color = outerConeColor;
-            Gizmos.DrawMesh(outerCone);
-        }
-
-        private void DrawCardioidWithParameters(Helpers.DirectivityModelSubbandParameters parameters)
-        {
-            Color cardioidColor = new Color(0f, 0f, 1f, 0.5f);
-            Gizmos.color = cardioidColor;
-
-            Mesh cardioid = PHASEDirectivityVisualization.GenerateCardioidMesh(parameters.Pattern, parameters.Sharpness);
-            cardioid.name = "cardioid";
-            Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.DrawMesh(cardioid);
-        }
-#endif
 #endif
     }
 }

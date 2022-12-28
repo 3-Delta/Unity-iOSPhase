@@ -34,7 +34,7 @@ MonoBehaviour:
   _directPathModeler: 1
   _earlyReflectionModeler: 1
   _lateReverbModeler: 1
-  _cullDistance: 0
+  _cullDistance: 4
   _listenerDirectivityPreset: 0
   _listenerDirectivitySharpness: 1
   _listenerDirectivityInnerAngle: 90
@@ -110,5 +110,5 @@ MonoBehaviour:
   _mixer: {fileID: -6997257061232114880}
   Mixer: {fileID: 0}
   _streamingAssetAudioClip: {fileID: 102900000, guid: cf3519960f50b4892a5b367dc188b8e0, type: 3}
-  _assetName: anechoic-vox-mono.wav
+  _assetName: crowd1
   _streamingAssetSubDirectory: 
