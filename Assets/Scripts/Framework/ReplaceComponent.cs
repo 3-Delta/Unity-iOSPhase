@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 // 其实ReplaceComponent<T> 是T的warpper,代理
 [DisallowMultipleComponent]
@@ -6,7 +7,12 @@ public class ReplaceComponent<T> : MonoBehaviour where T : MonoBehaviour {
     public static T finalT = null;
     public static T defaultT = null;
 
-    private T cur;
+    public T cur;
+
+    public virtual Action<int> onReplace
+    {
+        get { return null; }
+    }
 
     private void Awake() {
         if (defaultT == null) {
@@ -17,12 +23,14 @@ public class ReplaceComponent<T> : MonoBehaviour where T : MonoBehaviour {
         if (finalT == null) {
             // 首个
             finalT = defaultT;
+            onReplace?.Invoke(1);
         }
         else {
             // false当前的final
             finalT.enabled = false;
             // 设置新的final
             finalT = gameObject.AddComponent<T>();
+            onReplace?.Invoke(2);
         }
 
         cur = GetComponent<T>();
@@ -34,6 +42,7 @@ public class ReplaceComponent<T> : MonoBehaviour where T : MonoBehaviour {
             if (cur == finalT) {
                 finalT = defaultT;
                 finalT.enabled = true;
+                onReplace?.Invoke(3);
             }
         }
         else {
@@ -42,6 +51,7 @@ public class ReplaceComponent<T> : MonoBehaviour where T : MonoBehaviour {
 
             // 销毁默认,则默认指向fnial
             defaultT = finalT;
+            onReplace?.Invoke(4);
         }
     }
 

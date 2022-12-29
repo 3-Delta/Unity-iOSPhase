@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 #if UNITY_IPHONE || UNITY_IOS || UNITY_EDITOR_OSX
+using System.Collections;
 using Apple.PHASE;
 using UnityEngine.SceneManagement;
 
@@ -18,10 +19,33 @@ public class AdjustVolume : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         gameObject.AddComponent<PHASEEngine>();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        var go = new GameObject("Listener");
+        go.AddComponent<ReplacePhaseListener>().GetComponent<PHASEListener>().enabled = false;
+        DontDestroyOnLoad(go);
         
         slider.onValueChanged.AddListener(OnValueChanged);
         button1.onClick.AddListener(Onbutton1Clicked);
         button2.onClick.AddListener(Onbutton2Clicked);
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        Debug.LogError($"SceneName {arg0.name}");
+        if (arg0.name.Equals("1"))
+        {
+            StartCoroutine(nameof(LoadListener));
+        }
+    }
+
+    private IEnumerator LoadListener()
+    {
+        yield return new WaitForSeconds(13f);
+        
+        var go = new GameObject("ListenerFinal", typeof(ReplacePhaseListener));
+        go.transform.localPosition = new Vector3(100, 100, 100);
     }
 
     private void OnValueChanged(float v)
