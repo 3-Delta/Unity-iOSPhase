@@ -28,6 +28,11 @@ public class AdjustVolume : MonoBehaviour
         Debug.LogError("===============");
         foreach (var kvp in PHASESource._registeredSources)
         {
+            if (kvp.Value == null)
+            {
+                continue;
+            }
+
             Debug.LogError($"id:{kvp.Key} {kvp.Value.name} isPlaying? {kvp.Value.IsPlaying()}");
             Helpers.PHASEAdjustVolume(kvp.Key, v);
         }

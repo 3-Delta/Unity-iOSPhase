@@ -213,7 +213,7 @@ namespace Apple.PHASE
         [ContextMenu(nameof(Stop))]
         public void Stop()
         {
-            Debug.Log($"Stop {name}, before is {IsPlaying()}");
+            Debug.Log($"Stop {name}, before is {IsPlaying()} eventCount {_soundEventInstance.Count}");
             
             List<long> toBeDeleted = new List<long>();
             if (IsPlaying())
