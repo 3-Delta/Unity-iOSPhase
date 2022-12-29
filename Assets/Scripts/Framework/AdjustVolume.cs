@@ -17,6 +17,7 @@ public class AdjustVolume : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        gameObject.AddComponent<PHASEEngine>();
         
         slider.onValueChanged.AddListener(OnValueChanged);
         button1.onClick.AddListener(Onbutton1Clicked);

@@ -153,6 +153,7 @@ namespace Apple.PHASE
             }
             if (_toBeDestroyed)
             {
+                Debug.LogError($"remove source id: {sourceId}");
                 _registeredSources.Remove(sourceId);
             }
             _soundEventInstance.Remove(soundEventId);
@@ -164,7 +165,7 @@ namespace Apple.PHASE
         [ContextMenu(nameof(Play))]
         public void Play()
         {
-            Debug.Log($"Play {name}, before is {IsPlaying()}");
+            Debug.Log($"Play {_sourceId} {name}, before is {IsPlaying()}");
             if (_soundEvent == null)
             {
                 Debug.LogError("Invalid PHASESoundEvent on PHASESource.");
@@ -213,7 +214,7 @@ namespace Apple.PHASE
         [ContextMenu(nameof(Stop))]
         public void Stop()
         {
-            Debug.Log($"Stop {name}, before is {IsPlaying()} eventCount {_soundEventInstance.Count}");
+            Debug.Log($"Stop {_sourceId} {name}, before is {IsPlaying()} eventCount {_soundEventInstance.Count}");
             
             List<long> toBeDeleted = new List<long>();
             if (IsPlaying())

@@ -33,12 +33,6 @@ namespace Apple.PHASE
         // Awake is called before the scene starts.
         void Awake()
         {
-            bool result = Helpers.PHASEStart();
-            if (result == false)
-            {
-                Debug.LogError("Failed to start PHASE Engine");
-            }
-
             CreateListener();
 
             // Store the transform object (transform itself gets updated).
@@ -73,8 +67,6 @@ namespace Apple.PHASE
                     }
                 }
                 PHASESource.UpdateSources();
-
-                Helpers.PHASEUpdate();
             }
         }
 
@@ -94,13 +86,7 @@ namespace Apple.PHASE
                 }
             }
         }
-
-        void OnApplicationQuit()
-        {
-            PHASESoundEventNodeGraph.UnregisterAll();
-            Helpers.PHASEStop();
-        }
-
+        
         /// <summary>
         /// Give the listener access to a list of mixers.
         /// </summary>
