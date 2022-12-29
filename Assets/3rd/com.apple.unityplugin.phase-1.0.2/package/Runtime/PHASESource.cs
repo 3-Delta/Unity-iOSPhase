@@ -129,7 +129,7 @@ namespace Apple.PHASE
             PHASESource source;
             if (_registeredSources.TryGetValue(sourceId, out source))
             {
-                source.CompletionHandler(reason, soundEventId);
+                source.CompletionHandler(reason, sourceId, soundEventId);
             }
             else
             {
@@ -137,23 +137,23 @@ namespace Apple.PHASE
             }
         }
 
-        void CompletionHandler(Helpers.PHASESoundEventStartHandlerReason reason, long soundEventId)
+        void CompletionHandler(Helpers.PHASESoundEventStartHandlerReason reason, long sourceId, long soundEventId)
         {
             switch (reason)
             {
                 case Helpers.PHASESoundEventStartHandlerReason.PHASESoundEventStartHandlerReasonError:
-                    Debug.LogError($"Error in PHASESource {name} with ID {_sourceId}");
+                    Debug.LogError($"Error in PHASESource {name} with ID {sourceId}");
                     break;
                 case Helpers.PHASESoundEventStartHandlerReason.PHASESoundEventStartHandlerReasonFinishedPlaying:
-                    Debug.Log("PHASESource was finished: " + name);
+                    Debug.Log("PHASESource was finished");
                     break;
                 case Helpers.PHASESoundEventStartHandlerReason.PHASESoundEventStartHandlerReasonTerminated:
                     Debug.Log("PHASESource was killed");
                     break;
             }
-            if (_toBeDestroyed && _registeredSources.Count == 1)
+            if (_toBeDestroyed)
             {
-                _registeredSources.Remove(_sourceId);
+                _registeredSources.Remove(sourceId);
             }
             _soundEventInstance.Remove(soundEventId);
         }
@@ -164,9 +164,16 @@ namespace Apple.PHASE
         [ContextMenu(nameof(Play))]
         public void Play()
         {
+            Debug.Log($"Play {name}, before is {IsPlaying()}");
             if (_soundEvent == null)
             {
                 Debug.LogError("Invalid PHASESoundEvent on PHASESource.");
+                return;
+            }
+
+            if (IsPlaying())
+            {
+                Debug.LogError($"{name}'s PHASESource is playing");
                 return;
             }
 
@@ -206,6 +213,8 @@ namespace Apple.PHASE
         [ContextMenu(nameof(Stop))]
         public void Stop()
         {
+            Debug.Log($"Stop {name}, before is {IsPlaying()}");
+            
             List<long> toBeDeleted = new List<long>();
             if (IsPlaying())
             {
@@ -355,6 +364,8 @@ namespace Apple.PHASE
         /// </summary>
         public void DestroyFromPHASE()
         {
+            Debug.Log($"DestroyFromPHASE {name}");
+            
             Stop();
             Helpers.PHASEDestroySource(_sourceId);
             _toBeDestroyed = true;

@@ -25,15 +25,17 @@ public class AdjustVolume : MonoBehaviour
 
     private void OnValueChanged(float v)
     {
+        Debug.LogError("===============");
         foreach (var kvp in PHASESource._registeredSources)
         {
+            Debug.LogError($"id:{kvp.Key} {kvp.Value.name} isPlaying? {kvp.Value.IsPlaying()}");
             Helpers.PHASEAdjustVolume(kvp.Key, v);
         }
     }
 
     private void Update()
     {
-        num.text = $"sources: {PHASESource._registeredSources.Count.ToString()}";
+        num.text = $"sources: {PHASESource._registeredSources.Count.ToString()} listener: {Helpers.PHASEExistListener()}";
     }
 
     private void Onbutton1Clicked()
