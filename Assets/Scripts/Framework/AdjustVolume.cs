@@ -23,7 +23,7 @@ public class AdjustVolume : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         var go = new GameObject("Listener");
-        go.AddComponent<ReplacePhaseListener>().GetComponent<PHASEListener>().enabled = false;
+        go.AddComponent<ReplacePhaseListener>(); //.GetComponent<PHASEListener>().enabled = false;
         DontDestroyOnLoad(go);
         
         slider.onValueChanged.AddListener(OnValueChanged);
@@ -42,10 +42,11 @@ public class AdjustVolume : MonoBehaviour
 
     private IEnumerator LoadListener()
     {
-        yield return new WaitForSeconds(13f);
-        
+        // yield return new WaitForSeconds(13f);
+        yield return null;
+
         var go = new GameObject("ListenerFinal", typeof(ReplacePhaseListener));
-        go.transform.localPosition = new Vector3(100, 100, 100);
+        go.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     private void OnValueChanged(float v)
